@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Matthew Beck's Interactive Mapping Exercise</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<style>
+
+.sidebar {
+  position: absolute;
+  left: 0px;
+  width: 250px;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 20px;
+  font-size: 16px;
+  border: solid;
+  background-color: #add8e6;
+}
+.main-heading {
+    font-size: 15px;
+}
+</style>
+<body>
+  <div class="sidebar">
+  <font color="#3D9970"><center><h2 id="main-heading" >Lab 8</h2></center></font>
+  <div>
+
+<div class="row">
+  <div class="column">
+    <center> <img src="images/bucks.jpg" alt="Temple Logo" style="width:60%"> </center>
+  </div>
+  <font color="MidnightBlue"><center><h3> I love interactive maps!</h3></center></font>
+  </div>
+
+<h1> Bucks County Community College </h1>
+<h2> Newtown Campus </h2>
+<h3> Founded in 1964, Bucks offers over 90 academic programs within 7 Academic Departments, including 43 Associate's Degree programs designed to transfer to a four-year institution for the completion of a Bachelor's Degree. </h3>
+
+<footer>
+       <p> Share this template! <br> https://github.com/mckeont/GeoTag </p>
+</footer>
+
+    <div id="map" style=" position: fixed; right: 0; left: 300px; top: 0; bottom: 0 "></div>
+
+    <!-- JS IMPORTS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src= "http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+    <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src= "js/setup.js"></script>
+    <script src= "js/hicks.js"></script>
+
+    <script>
+
+// Create a style variable
+    var myStyle = {
+    radius: 5,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.7
+};
+
+//Load in geojson
+    var hicks =   L.geoJSON(hicks, {
+          style: myStyle
+        }).bindPopup(function (layer) {
+       return "name" + layer.feature.properties.name
+    }).addTo(map).bringToBack();
+
+// Make a simple circle
+var circle = L.circle([40.23889222664199, -74.96665330529639], {
+    color: 'red',
+    fillColor: '#00000000',
+    fillOpacity: 0.1,
+    radius: 500
+}).addTo(map);
+
+// Make a shape
+var polygon = L.polygon([
+    [-74.96509555634498, 40.23853916353576],
+    [-74.96515003247436, 40.23823687196895],
+    [-74.96453612840365, 40.23818409076341],
+    [-74.96452146175318, 40.23829125256182],
+    [-74.96495727078667, 40.23833443711936],
+    [-74.96491746130714, 40.23851997046083],
+    [-74.96509555634498, 40.23853916353576]
+]).addTo(map);
+
+// Add a marker
+L.marker([40.23889222664199, -74.96665330529639]).addTo(map);
+    </script>
+
+</body>
+</html>
